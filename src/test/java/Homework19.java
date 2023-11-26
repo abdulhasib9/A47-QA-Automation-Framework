@@ -1,5 +1,13 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+
+import java.time.Duration;
 
 public class Homework19 {
     @Test
@@ -11,7 +19,7 @@ public class Homework19 {
         WebDriver driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-        driver.get(baseUrl)
+        driver.get(baseUrl);
 
         //login
         driver.findElement(By.xpath("//input[@placeholder='Email Address']")).sendKeys("username.testpro.io");
@@ -27,16 +35,16 @@ public class Homework19 {
 
 
         //checking deletion confirmation
-        String playlistName = driver.findElement(By.xpath("//*[@id=\"playlistWrapper\"]/header/div[2]/h1/text()").getText())
-        WebElement successToaster =driver.findElement(By.xpath("///html[1]/body[1]/div[2]/div[1]"));
-        string successToasterActiveClass = pauseButton.getAttribute("class");
-        string desiredClass = "success show";
+        String playlistName = driver.findElement(By.xpath("//*[@id=\"playlistWrapper\"]/header/div[2]/h1/text()")).getText();
+        WebElement successToaster =driver.findElement(By.xpath("//html[1]/body[1]/div[2]/div[1]"));
+        String successToasterActiveClass = successToaster.getAttribute("class");
+        String desiredClass = "success show";
 
 
         if (successToasterActiveClass.contains(desiredClass)) {
-            print("Deleted playlist "+playlistName)
+            System.out.println("Deleted playlist "+playlistName);
         } else {
-            print("Error occured !!!")
+            System.out.println("Error occured!");
         }
 
         driver.quit();

@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class Homework19 {
+public class Homework20 {
 
     @Test
     @Parameters("baseUrl")
