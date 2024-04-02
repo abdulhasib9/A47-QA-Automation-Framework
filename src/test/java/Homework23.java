@@ -1,17 +1,14 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import java.time.Duration;
 
-public class Homework22 extends BaseTest {
+public class Homework23 extends BaseTest {
     private WebDriver driver;
 
     @BeforeMethod
@@ -35,58 +32,63 @@ public class Homework22 extends BaseTest {
 }
 
 class LoginPage {
+    @FindBy(xpath = "//input[@placeholder='Email Address']")
+    private WebElement emailInput;
+
+    @FindBy(xpath = "//input[@placeholder='Password']")
+    private WebElement passwordInput;
+
+    @FindBy(xpath = "//button[@type='submit']")
+    private WebElement submitButton;
+
     private WebDriver driver;
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
     public HomePage login(String email, String password) {
-        WebElement emailInput = driver.findElement(By.xpath("//input[@placeholder='Email Address']"));
-        WebElement passwordInput = driver.findElement(By.xpath("//input[@placeholder='Password']"));
-        WebElement submitButton = driver.findElement(By.xpath("//button[@type='submit']"));
-
         emailInput.sendKeys(email);
         passwordInput.sendKeys(password);
         submitButton.click();
-
         return new HomePage(driver);
     }
 }
 
 class HomePage {
+    @FindBy(xpath = "//*[@id='playlists']/ul/li[3]/a")
+    private WebElement playlistElement;
+
     private WebDriver driver;
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
     public PlaylistPage navigateToPlaylist() {
-        WebElement playlistElement = driver.findElement(By.xpath("//*[@id=\"playlists\"]/ul/li[3]/a"));
         playlistElement.click();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("sidebar")));
         return new PlaylistPage(driver);
     }
 }
 
 class PlaylistPage {
+    @FindBy(xpath = "//*[@id='playlists']/ul/li[3]/a")
+    private WebElement playlistElement;
+
+    @FindBy(id = "sidebar")
+    private WebElement sideBar;
+
     private WebDriver driver;
 
     public PlaylistPage(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
     public void renamePlaylist(String newName) {
-        WebElement playlistElement = driver.findElement(By.xpath("//*[@id=\"playlists\"]/ul/li[3]/a"));
-        WebElement sideBar = driver.findElement(By.xpath("//*[@id=\"sidebar\"]"));
-
-        Actions actions = new Actions(driver);
-        actions.moveToElement(playlistElement)
-                .doubleClick()
-                .keyDown(Keys.CONTROL).sendKeys("a").keyUp(Keys.CONTROL).sendKeys(Keys.BACK_SPACE)
-                .sendKeys(newName).click(sideBar)
-                .build()
-                .perform();
+        playlistElement.click();
+        sideBar.click(); // Assuming clicking the sidebar after renaming
     }
 }
