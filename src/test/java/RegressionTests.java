@@ -1,4 +1,4 @@
-// LoginTests.java
+// RegressionTests.java
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -6,7 +6,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class LoginTests {
+public class RegressionTests {
     WebDriver driver;
     LoginPage loginPage;
 
@@ -17,11 +17,11 @@ public class LoginTests {
     }
 
     @Test
-    public void testSuccessfulLogin() {
-        loginPage.enterUsername("abdul.hasib.yousufzai@testpro.io");
-        loginPage.enterPassword("test12345");
+    public void testFailedLogin() {
+        loginPage.enterUsername("invaliduser");
+        loginPage.enterPassword("invalidpassword");
         loginPage.clickLoginButton();
-        // Assertion for successful login
+        // Assertion for failed login
     }
 
     @AfterClass

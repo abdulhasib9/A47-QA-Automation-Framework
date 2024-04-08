@@ -1,14 +1,43 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >-->
 
-<suite name="TestNG">
+<!--<suite name="TestNG">-->
 
-    <test name="Example Test" preserve-order="false">
+<!--    <test name="Example Test" preserve-order="false">-->
+<!--        <classes>-->
+<!--&lt;!&ndash;            <class name="LoginTests"/>&ndash;&gt;-->
+<!--            <class name="BaseTest"/>-->
+
+<!--&lt;!&ndash;           <class name="Homework23" />&ndash;&gt;-->
+<!--        </classes>-->
+<!--    </test>-->
+<!--</suite>-->
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="TestSuite">
+    <test name="SmokeTests">
         <classes>
-<!--            <class name="LoginTests"/>-->
-            <class name="BaseTest"/>
+            <class name="LoginTests"/>
 
-<!--           <class name="Homework23" />-->
         </classes>
     </test>
+
+    <test name="RegressionTests">
+        <classes>
+            <class name="RegressionTests"/>
+
+        </classes>
+    </test>
+
+
+
+    <listeners>
+        <listener class-name="org.testng.reporters.TestHTMLReporter"/>
+        <listener class-name="org.testng.reporters.JUnitXMLReporter"/>
+        <listener class-name="org.testng.reporters.EmailableReporter"/>
+    </listeners>
+
+    <parameter name="browser" value="chrome"/>
+
+
 </suite>
